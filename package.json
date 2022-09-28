@@ -1,0 +1,42 @@
+{
+  "name": "muroexe",
+  "version": "1.0.0",
+  "description": "MERN E-commerce App",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "server": "nodemon backend/server.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server:devMode": "SET NODE_ENV=development& nodemon backend/server.js",
+    "server:prodMode": "SET NODE_ENV=production& nodemon backend/server.js",
+    "data:insert": "node backend/dev-data/insertData.js",
+    "data:destroy": "node backend/dev-data/insertData.js -d"
+  },
+  "author": "OTM",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^7.4.0",
+    "nodemon": "^2.0.19"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "express-async-handler": "^1.2.0",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^6.6.0",
+    "express-validator": "^6.14.2",
+    "helmet": "^6.0.0",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.6.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.7.8",
+    "sharp": "^0.31.0",
+    "slugify": "^1.6.5",
+    "xss-clean": "^0.1.1"
+  }
+}

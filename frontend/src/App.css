@@ -1,0 +1,14 @@
+/* RESET STYLES */
+ul {
+  padding-left: 0;
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+/* REACT SLICK */
+.slick-dots li button:before,
+.slick-dots li button:after {
+  font-size: 15px;
+}
