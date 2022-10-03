@@ -2,19 +2,18 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import Slider from "react-slick";
 import {Container, Alert} from "react-bootstrap";
-import {LinkContainer} from "react-router-bootstrap";
 import SectionHead from "../../components/SectionHead/SectionHead";
 import SecContainer from "../../layout/SecContainer/SecContainer";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import Spinner from "../../components/Spinner/Spinner";
 
 //Requests
-import {getTopSalesProducts} from "../../RTK/slices/topSalesProductsSlice";
+import {getTopSalesProducts} from "../../RTK/slices/productsSlice";
 
 const SecTopSales = () => {
   const dispatch = useDispatch();
   const {loading, topSalesProducts, error} = useSelector(
-    (state) => state.topSales
+    (state) => state.products
   );
   const {data} = topSalesProducts;
 

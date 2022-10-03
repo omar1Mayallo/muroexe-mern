@@ -1,14 +1,23 @@
-import React from "react";
-import {Container, Row, Col, Image} from "react-bootstrap";
+import React, {useEffect} from "react";
+import {Container, Image, Alert} from "react-bootstrap";
 import SecContainer from "../../layout/SecContainer/SecContainer";
 import {LinkContainer} from "react-router-bootstrap";
 import Slider from "react-slick";
+import {useDispatch, useSelector} from "react-redux";
+import {getAllCategories} from "../../RTK/slices/categoriesSlice";
+import Spinner from "../../components/Spinner/Spinner";
 
-import shoesImg from "../../images/Categories/c-Shoes.jpg";
-import sneakersImg from "../../images/Categories/c-Sneakers.jpg";
-import slippersImg from "../../images/Categories/c-Slippers.jpg";
-import accessoriesImg from "../../images/Categories/c-Accessories.jpg";
 const SecCategories = () => {
+  const dispatch = useDispatch();
+  const {loading, allCategories, error} = useSelector(
+    (state) => state.categories
+  );
+  const {data} = allCategories;
+
+  useEffect(() => {
+    dispatch(getAllCategories());
+  }, [dispatch]);
+
   const settings = {
     dots: true,
     infinite: false,
@@ -45,21 +54,30 @@ const SecCategories = () => {
       },
     ],
   };
-  const categoriesImages = [sneakersImg, shoesImg, slippersImg, accessoriesImg];
-  const categoriesList = categoriesImages.map((c) => (
-    <LinkContainer
-      key={c}
-      className="p-2"
-      to="/shop"
-      style={{cursor: "pointer"}}
-    >
-      <Image src={c} alt="category-img" fluid />
-    </LinkContainer>
-  ));
+  const categoriesList =
+    data &&
+    data.docs.map(({_id, image, slug}) => (
+      <LinkContainer
+        key={_id}
+        className="p-2"
+        to={`/categories/${slug}`}
+        style={{cursor: "pointer"}}
+      >
+        <Image src={image} alt="category-img" fluid />
+      </LinkContainer>
+    ));
   return (
     <SecContainer secName="categories-Sec" withMargin>
       <Container>
-        <Slider {...settings}>{categoriesList}</Slider>
+        <div className="my-3">
+          {error ? (
+            <Alert variant="danger">{error}</Alert>
+          ) : loading ? (
+            <Spinner />
+          ) : (
+            <Slider {...settings}>{categoriesList}</Slider>
+          )}
+        </div>
       </Container>
     </SecContainer>
   );

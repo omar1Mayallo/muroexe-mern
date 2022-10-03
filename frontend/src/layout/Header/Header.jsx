@@ -1,12 +1,35 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Logo from "./Logo.jpg";
-import {Navbar, Container, Nav, NavDropdown, Image} from "react-bootstrap";
+import {
+  Navbar,
+  Container,
+  Nav,
+  NavDropdown,
+  Image,
+  Alert,
+} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
 import {BsCartFill, BsPersonFill} from "react-icons/bs";
-
+import {useDispatch, useSelector} from "react-redux";
+import {getAllCategories} from "../../RTK/slices/categoriesSlice";
 const Header = () => {
   const catagories = ["Sneakers", "Shoes", "Slippers", "Accessories"];
+  const dispatch = useDispatch();
+  const {loading, allCategories, error} = useSelector(
+    (state) => state.categories
+  );
+  const {data} = allCategories;
+  useEffect(() => {
+    dispatch(getAllCategories());
+  }, [dispatch]);
 
+  const categoriesList =
+    data &&
+    data.docs.map(({_id, name, slug}) => (
+      <LinkContainer to={`/categories/${slug}`} key={_id}>
+        <NavDropdown.Item>{name.toUpperCase()}</NavDropdown.Item>
+      </LinkContainer>
+    ));
   return (
     <header>
       <Navbar bg="light" expand="lg">
@@ -27,11 +50,11 @@ const Header = () => {
                 <Nav.Link>Brands</Nav.Link>
               </LinkContainer>
               <NavDropdown title="Catagories" id="basic-nav-dropdown">
-                {catagories.map((c) => (
-                  <LinkContainer to={`/categories/${c.toLowerCase()}`} key={c}>
-                    <NavDropdown.Item>{c.toUpperCase()}</NavDropdown.Item>
-                  </LinkContainer>
-                ))}
+                {error ? (
+                  <Alert variant="danger">{error}</Alert>
+                ) : (
+                  categoriesList
+                )}
               </NavDropdown>
             </Nav>
             <Nav className="ms-auto">

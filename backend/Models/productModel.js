@@ -57,16 +57,30 @@ const productSchema = new mongoose.Schema(
     },
     ratingAvr: {
       type: Number,
+      default: 4,
       min: [1, "Rating must be above or equal 1.0"],
       max: [5, "Rating must be below or equal 5.0"],
+      //2.667 ==> 26,67 ==> 27 ==> 2.7
+      set: (val) => Math.round(val * 10) / 10,
     },
     numReviews: {
       type: Number,
       default: 0,
     },
   },
-  {timestamps: true, toJSON: {virtuals: true}, toObject: {virtuals: true}}
+  {
+    timestamps: true,
+    //To Virtuals Properties
+    toJSON: {virtuals: true},
+    toObject: {virtuals: true},
+  }
 );
+
+productSchema.virtual("reviews", {
+  ref: "Review",
+  foreignField: "product",
+  localField: "_id",
+});
 
 productSchema.pre(/^find/, function (next) {
   this.populate({path: "category subcategories", select: "name -_id"});

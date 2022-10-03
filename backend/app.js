@@ -20,6 +20,9 @@ import categoryRouter from "./Routes/categoryRouter.js";
 import subCategoryRouter from "./Routes/subCategoryRouter.js";
 import brandRouter from "./Routes/brandRouter.js";
 import userRouter from "./Routes/userRouter.js";
+import reviewRouter from "./Routes/reviewRouter.js";
+import addressRouter from "./Routes/addressRouter.js";
+import wishlistRouter from "./Routes/wishlistRouter.js";
 
 dotenv.config();
 //Initialize Express App
@@ -27,7 +30,7 @@ const app = express();
 
 //Serve static files
 const __filename = fileURLToPath(import.meta.url);
-export const __dirname = path.dirname(__filename);
+const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, "uploads")));
 //__________MIDDLEWARES____________//
 // 1) Helmet (best to set it early in middleware stack for sure helmet headers will be set)
@@ -68,6 +71,9 @@ app.use("/api/products", productRouter);
 app.use("/api/categories", categoryRouter);
 app.use("/api/subcategories", subCategoryRouter);
 app.use("/api/brands", brandRouter);
+app.use("/api/reviews", reviewRouter);
+app.use("/api/addresses", addressRouter);
+app.use("/api/wishlist", wishlistRouter);
 
 //Not Found Routes
 app.use("*", (req, res, next) => {

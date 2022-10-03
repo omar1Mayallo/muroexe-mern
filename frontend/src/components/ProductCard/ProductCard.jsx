@@ -2,7 +2,6 @@ import React from "react";
 import {Image} from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
 import {MdStar, MdStarHalf, MdStarBorder} from "react-icons/md";
-import {LinkContainer} from "react-router-bootstrap";
 import {
   CardTitle,
   ProductItem,
@@ -10,6 +9,7 @@ import {
   Price,
   NumOfRev,
 } from "./ProductCardStyles";
+import {Link} from "react-router-dom";
 
 // name,slug,price,priceAfterDiscount,ratingAvr,image,numReviews
 const ProductCard = ({
@@ -25,27 +25,36 @@ const ProductCard = ({
     edit: false,
   };
   return (
-    <LinkContainer to={`/${_id}`}>
-      <ProductItem className="p-3 m-2">
-        <Image src={image} alt="product-image" className="w-100" />
-        <hr />
-        <CardTitle>{name}</CardTitle>
-        <div className="product-body">
-          <div className="my-2">
-            <div className="d-flex align-items-center flex-wrap">
-              <ReactStars {...setting} />
-              <NumOfRev> ({numReviews})</NumOfRev>
-            </div>
-          </div>
-          <div className="d-flex align-items-center">
-            <Price>Price : {price} $</Price>
-            {priceAfterDiscount && (
-              <SalePrice className="ms-4">{priceAfterDiscount} $</SalePrice>
-            )}
+    <ProductItem className="p-3 m-2">
+      <Link to={`/${_id}`}>
+        <Image
+          src={image}
+          alt="product-image"
+          className="w-100"
+          style={{height: "230px"}}
+        />
+      </Link>
+      <hr />
+
+      <Link to={`/${_id}`}>
+        <CardTitle style={{fontSize: "calc(0.75em + 1vmin)"}}>{name}</CardTitle>
+      </Link>
+
+      <div className="product-body">
+        <div className="my-2">
+          <div className="d-flex align-items-center flex-wrap">
+            <ReactStars {...setting} />
+            <NumOfRev> ({numReviews})</NumOfRev>
           </div>
         </div>
-      </ProductItem>
-    </LinkContainer>
+        <div className="d-flex align-items-center">
+          <Price>{price} $</Price>
+          {priceAfterDiscount && (
+            <SalePrice className="ms-4">{priceAfterDiscount} $</SalePrice>
+          )}
+        </div>
+      </div>
+    </ProductItem>
   );
 };
 

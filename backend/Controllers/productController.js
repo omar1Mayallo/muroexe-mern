@@ -87,7 +87,7 @@ export const getAllProducts = getAll(Product);
 // @desc    Get a product
 // @route   GET /api/products/:id
 // @access  Public
-export const getProduct = getOne(Product);
+export const getProduct = getOne(Product, "reviews");
 
 // @desc    Get Top 7 Sales
 // @route   GET /api/products/top-7-sales

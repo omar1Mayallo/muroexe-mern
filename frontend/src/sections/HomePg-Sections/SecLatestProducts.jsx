@@ -8,11 +8,13 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 import Spinner from "../../components/Spinner/Spinner";
 
 //Requests
-import {getLatestProducts} from "../../RTK/slices/latestProductsSlice";
+import {getLatestProducts} from "../../RTK/slices/productsSlice";
 
 const SecLatestProducts = () => {
   const dispatch = useDispatch();
-  const {loading, latestProducts, error} = useSelector((state) => state.latest);
+  const {loading, latestProducts, error} = useSelector(
+    (state) => state.products
+  );
   const {data} = latestProducts;
 
   useEffect(() => {

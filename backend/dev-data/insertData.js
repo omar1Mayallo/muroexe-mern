@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import fs from "fs";
 import _ from "colors";
 import connectDB from "../Config/DB.js";
-import {categories, products, subcategories, brands, users} from "./devData.js";
+import {categories, products, subcategories, brands} from "./devData.js";
 import Product from "../Models/productModel.js";
 import User from "../Models/userModel.js";
 import Category from "../Models/categoryModel.js";
@@ -12,10 +13,15 @@ import SubCategory from "../Models/subCategoryModel.js";
 dotenv.config();
 connectDB();
 
+//Read JSON Files
+// const docs = JSON.parse(
+//   fs.readFileSync(`${__dirname}/data/docs.json`, "utf-8")
+// );
+
 const insertData = async () => {
   try {
-    // 1) Delete all data before insert it to database
-    await Product.deleteMany();
+    // 1) Delete all data before insert the data to database
+    // await Product.deleteMany();
     await User.deleteMany();
 
     // 🟥NOTE🟥 I added this one time to handle Product controller and no need to delete it more
@@ -24,8 +30,7 @@ const insertData = async () => {
     // await Brand.deleteMany();
 
     // 2) Insert DEV-Data
-    await Product.insertMany(products);
-    // await User.insertMany(users);
+    // await Product.insertMany(products);
 
     // await Category.insertMany(categories);
     // await SubCategory.insertMany(subcategories);
@@ -42,8 +47,8 @@ const insertData = async () => {
 const destroyData = async () => {
   try {
     // 1) Delete all resources from Database
-    await Product.deleteMany();
-    // await User.deleteMany();
+    // await Product.deleteMany();
+    await User.deleteMany();
 
     // 🟥NOTE🟥 I added this one time to handle Product controller and no need to delete it more
     // await Category.deleteMany();

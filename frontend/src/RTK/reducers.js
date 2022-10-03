@@ -1,12 +1,10 @@
 import {combineReducers} from "@reduxjs/toolkit";
-import productSlice from "./slices/productSlice";
-import latestProductSlice from "./slices/latestProductsSlice";
-import topSalesProductsSlice from "./slices/topSalesProductsSlice";
+import categoriesSlice from "./slices/categoriesSlice";
+import productsSlice from "./slices/productsSlice";
 
 const rootReducer = combineReducers({
-  latest: latestProductSlice,
-  topSales: topSalesProductsSlice,
-  products: productSlice,
+  products: productsSlice,
+  categories: categoriesSlice,
 });
 
 export default rootReducer;

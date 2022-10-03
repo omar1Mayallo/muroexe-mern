@@ -4,7 +4,7 @@ import APIFeatures from "../../utils/apiFeatures.js";
 
 export const getAll = (Model) =>
   asyncHandler(async (req, res, next) => {
-    //For Nested Route
+    //For Nested Routes
     let filter = {};
     if (req.filterObj) filter = req.filterObj;
 
@@ -29,10 +29,16 @@ export const getAll = (Model) =>
     });
   });
 
-export const getOne = (Model) =>
+export const getOne = (Model, populateOpts) =>
   asyncHandler(async (req, res, next) => {
     const {id} = req.params;
-    const doc = await Model.findById(id).select("-__v");
+    //Build Query
+    let query = Model.findById(id).select("-__v");
+    if (populateOpts) {
+      query = query.populate(populateOpts);
+    }
+    //Execute query
+    const doc = await query;
 
     if (!doc) {
       return next(new APIError(`There is no doc match this id : ${id}`, 404));
@@ -66,6 +72,8 @@ export const updateOne = (Model) =>
     if (!doc) {
       return next(new APIError(`There is no doc match this id : ${id}`, 404));
     }
+    //Activate the "save" event when update
+    doc.save();
     res.status(200).json({
       status: "success",
       data: {
@@ -81,6 +89,8 @@ export const deleteOne = (Model) =>
     if (!doc) {
       return next(new APIError(`There is no doc match this id : ${id}`, 404));
     }
+    //Activate the "remove" event when delete
+    doc.remove();
     res.status(204).json({
       status: "success",
     });

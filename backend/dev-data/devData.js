@@ -4,28 +4,28 @@ export const categories = [
     slug: "sneakers",
     description:
       "Discover the Muroexe sneakers collection on our website. Vegan sneakers at the best price and with a wide range of models available. Maximum comfort and flexibility.",
-    image: "https://i.ibb.co/mc0szSV/c-Sneakers.jpg",
+    image: "c-Sneakers.jpg",
   },
   {
     name: "Shoes",
     slug: "shoes",
     description:
       "Muroexe shoe collection: comfortable, technical and elegant, at the best price. Unisex ecological footwear with a huge variety of models available. 100% cruelty free.",
-    image: "https://i.ibb.co/6XBxh4W/c-Shoes.jpg",
+    image: "c-Shoes.jpg",
   },
   {
     name: "Slippers",
     slug: "slippers",
     description:
       "Enjoy the comfort of Muroexe slippers. Ecological slippers for women and men with great comfort and flexibility.",
-    image: "https://i.ibb.co/8Y14frC/c-Slippers.jpg",
+    image: "c-Slippers.jpg",
   },
   {
     name: "Accessories",
     slug: "accessories",
     description:
       "Discover the Muroexe accessories collection on our website. Accessories, bags, backpacks, wallets and much more! Unisex and 100% cruelty free.",
-    image: "https://i.ibb.co/zGjd3tg/c-Accessories.jpg",
+    image: "c-Accessories.jpg",
   },
 ];
 
@@ -77,27 +77,27 @@ export const brands = [
   {
     name: "Nike",
     slug: "nike",
-    image: "https://i.ibb.co/whzTBd6/Br-nike.png",
+    image: "Br-nike.png",
   },
   {
     name: "Adidas",
     slug: "adidas",
-    image: "https://i.ibb.co/84PZqmH/Br-adidas.png",
+    image: "Br-adidas.png",
   },
   {
     name: "Puma",
     slug: "puma",
-    image: "https://i.ibb.co/4K7x86H/Br-puma.png",
+    image: "Br-puma.png",
   },
   {
     name: "Converse",
     slug: "converse",
-    image: "https://i.ibb.co/YybmgF1/Br-converse.png",
+    image: "Br-converse.png",
   },
   {
     name: "Reebok",
     slug: "reebok",
-    image: "https://i.ibb.co/yFky4S3/Br-reebook.png",
+    image: "Br-reebook.png",
   },
 ];
 
@@ -107,7 +107,7 @@ export const products = [
   {
     name: "Atom Ochre Boot",
     slug: "atom-ochre-boot",
-    image: "https://i.ibb.co/3hs1ZC9/alpha-boot-black.jpg",
+    image: "shoes-(1).png",
     category: "63292e769de7cef23355a195",
     price: 300,
     priceAfterDiscount: 222,
@@ -121,7 +121,7 @@ export const products = [
   {
     name: "Alpha Boot Brown",
     slug: "alpha-boot-brown",
-    image: "https://i.ibb.co/C5H64jd/alpha-boot-brown.jpg",
+    image: "shoes-(2).webp",
     category: "63292e769de7cef23355a195",
     price: 120,
     qtyInStock: 5,
@@ -134,7 +134,7 @@ export const products = [
   {
     name: "Alpha Boot Black",
     slug: "alpha-boot-black",
-    image: "https://i.ibb.co/c8q2Z3B/army-boot-black.jpg",
+    image: "shoes-(3).jpg",
     category: "63292e769de7cef23355a195",
     price: 350,
     priceAfterDiscount: 222,
@@ -148,7 +148,7 @@ export const products = [
   {
     name: "Army Boot Black",
     slug: "army-boot-black",
-    image: "https://i.ibb.co/sHtvHZP/army-boot-blue.jpg",
+    image: "shoes-(4).jpg",
     category: "63292e769de7cef23355a195",
     price: 1900,
     qtyInStock: 20,
@@ -161,7 +161,7 @@ export const products = [
   {
     name: "Ucon Black",
     slug: "ucon-black",
-    image: "https://i.ibb.co/n0fNHNf/army-boot-ochre.jpg",
+    image: "shoes-(5).jpg",
     category: "63292e769de7cef23355a195",
     price: 564,
     qtyInStock: 32,
@@ -174,7 +174,7 @@ export const products = [
   {
     name: "Atom Black Boot",
     slug: "atom-black-boot",
-    image: "https://i.ibb.co/4Zwk1rg/atom-brown-boot.jpg",
+    image: "shoes-(6).jpg",
     category: "63292e769de7cef23355a195",
     price: 354,
     priceAfterDiscount: 222,
@@ -188,7 +188,7 @@ export const products = [
   {
     name: "Army Boot Blue",
     slug: "army-boot-blue",
-    image: "https://i.ibb.co/85WQ8qK/atom-grey-boot.jpg",
+    image: "shoes-(7).jpg",
     category: "63292e769de7cef23355a195",
     price: 300,
     qtyInStock: 8,
@@ -201,7 +201,7 @@ export const products = [
   {
     name: "Atom Gray Boot",
     slug: "atom-gray-boot",
-    image: "https://i.ibb.co/nrkjbJv/atom-mist-beige.jpg",
+    image: "shoes-(8).jpg",
     category: "63292e769de7cef23355a195",
     price: 350,
     qtyInStock: 7,
@@ -214,7 +214,7 @@ export const products = [
   {
     name: "Alpha Army Boot",
     slug: "alpha-army-boot",
-    image: "https://i.ibb.co/kHrFBzh/atom-ochre-boot.jpg",
+    image: "shoes-(9).webp",
     category: "63292e769de7cef23355a195",
     price: 789,
     priceAfterDiscount: 222,
@@ -228,7 +228,7 @@ export const products = [
   {
     name: "Atom Mist Blue",
     slug: "atom-mist-blue",
-    image: "https://i.ibb.co/NYDjx8X/meteor-black-1.jpg",
+    image: "shoes-(10).jpg",
     category: "63292e769de7cef23355a195",
     price: 456,
     qtyInStock: 2,
@@ -241,7 +241,7 @@ export const products = [
   {
     name: "Atom Mist Gray",
     slug: "atom-mist-gray",
-    image: "https://i.ibb.co/YZfLnc2/meteor-blue.jpg",
+    image: "shoes-(11).jpg",
     category: "63292e769de7cef23355a195",
     price: 190,
     qtyInStock: 12,
@@ -254,7 +254,7 @@ export const products = [
   {
     name: "Marathon Black Boot",
     slug: "marathon-black-boot",
-    image: "https://i.ibb.co/nrkjbJv/atom-mist-beige.jpg",
+    image: "shoes-(12).png",
     category: "63292e769de7cef23355a195",
     price: 600,
     priceAfterDiscount: 222,
@@ -270,7 +270,7 @@ export const products = [
   {
     name: "alaska grey",
     slug: "alaska-grey",
-    image: "https://i.ibb.co/syCVgMk/alaska-grey.jpg",
+    image: "sneaker-(1).jpg",
     category: "63292e769de7cef23355a194",
     price: 200,
     qtyInStock: 0,
@@ -283,7 +283,7 @@ export const products = [
   {
     name: "alpha carbono dark red",
     slug: "alpha-carbono-dark-red",
-    image: "https://i.ibb.co/QpyjB5b/alpha-carbono-dark-red.jpg",
+    image: "sneaker-(2).png",
     category: "63292e769de7cef23355a194",
     price: 220,
     qtyInStock: 7,
@@ -296,7 +296,7 @@ export const products = [
   {
     name: "alpha neo beige",
     slug: "alpha-neo-beige",
-    image: "https://i.ibb.co/JrFnQXm/alpha-neo-beige.png",
+    image: "sneaker-(4).jpg",
     category: "63292e769de7cef23355a194",
     price: 280,
     priceAfterDiscount: 222,
@@ -310,7 +310,7 @@ export const products = [
   {
     name: "alpha neo dark grey",
     slug: "alpha-neo-dark-grey",
-    image: "https://i.ibb.co/nPTR26h/alpha-neo-dark-grey.png",
+    image: "sneaker-(4).png",
     category: "63292e769de7cef23355a194",
     price: 400,
     qtyInStock: 4,
@@ -323,7 +323,7 @@ export const products = [
   {
     name: "alpha neo pink",
     slug: "alpha-neo-pink",
-    image: "https://i.ibb.co/bs4xktd/alpha-neo-pink.jpg",
+    image: "sneaker-(5).png",
     category: "63292e769de7cef23355a194",
     price: 600,
     priceAfterDiscount: 222,
@@ -337,7 +337,7 @@ export const products = [
   {
     name: "army blue",
     slug: "army-blue",
-    image: "https://i.ibb.co/Gxz7JWC/army-blue.jpg",
+    image: "sneaker-(6).png",
     category: "63292e769de7cef23355a194",
     price: 788,
     qtyInStock: 12,
@@ -350,7 +350,7 @@ export const products = [
   {
     name: "army grey",
     slug: "army-grey",
-    image: "https://i.ibb.co/Ln7V3Cn/army-grey.jpg",
+    image: "sneaker-(7).jpg",
     category: "63292e769de7cef23355a194",
     price: 650,
     qtyInStock: 0,
@@ -363,7 +363,7 @@ export const products = [
   {
     name: "atom oasis orange",
     slug: "atom-oasis-orange",
-    image: "https://i.ibb.co/Xt9Rt62/atom-oasis-orange.png",
+    image: "sneaker-(8).jpg",
     category: "63292e769de7cef23355a194",
     price: 400,
     qtyInStock: 0,
@@ -376,7 +376,7 @@ export const products = [
   {
     name: "atom oasis red",
     slug: "atom-oasis-red",
-    image: "https://i.ibb.co/Xx8QRkw/atom-oasis-red.png",
+    image: "sneaker-(9).jpg",
     category: "63292e769de7cef23355a194",
     price: 6000,
     priceAfterDiscount: 3000,
@@ -390,7 +390,7 @@ export const products = [
   {
     name: "density blue",
     slug: "density-blue",
-    image: "https://i.ibb.co/n0mtb3r/density-blue.jpg",
+    image: "sneaker-(10).png",
     category: "63292e769de7cef23355a194",
     price: 710,
     priceAfterDiscount: 222,
@@ -404,7 +404,7 @@ export const products = [
   {
     name: "hybrid black",
     slug: "hybrid-black",
-    image: "https://i.ibb.co/YPS8pHj/hybrid-black.jpg",
+    image: "sneaker-(11).jpg",
     category: "63292e769de7cef23355a194",
     price: 1200,
     priceAfterDiscount: 900,
@@ -418,7 +418,7 @@ export const products = [
   {
     name: "juno cloud blue",
     slug: "juno-cloud-blue",
-    image: "https://i.ibb.co/NY37gZd/juno-cloud-blue.jpg",
+    image: "sneaker-(12).jpg",
     category: "63292e769de7cef23355a194",
     price: 1900,
     priceAfterDiscount: 1500,
@@ -434,7 +434,7 @@ export const products = [
   {
     name: "home mood black",
     slug: "home-mood-black",
-    image: "https://i.ibb.co/M2JDL6M/home-mood-black.png",
+    image: "slipper-(1).jpg",
     category: "63292e769de7cef23355a196",
     price: 900,
     qtyInStock: 20,
@@ -447,7 +447,7 @@ export const products = [
   {
     name: "home mood blue",
     slug: "home-mood-blue",
-    image: "https://i.ibb.co/8dRm9qp/home-mood-blue.png",
+    image: "slipper-(2).jpg",
     category: "63292e769de7cef23355a196",
     price: 300,
     qtyInStock: 4,
@@ -460,7 +460,7 @@ export const products = [
   {
     name: "slipper grey",
     slug: "slipper-grey",
-    image: "https://i.ibb.co/W28M1rK/slipper-grey.jpg",
+    image: "slipper-(3).webp",
     category: "63292e769de7cef23355a196",
     price: 400,
     qtyInStock: 0,
@@ -475,7 +475,7 @@ export const products = [
   {
     name: "Block Beige",
     slug: "block-beige",
-    image: "https://i.ibb.co/PZCYprP/block-beige.jpg",
+    image: "Accs-Bags-(1).png",
     category: "63292e769de7cef23355a197",
     price: 500,
     priceAfterDiscount: 222,
@@ -490,7 +490,7 @@ export const products = [
   {
     name: "Block Black",
     slug: "block-black",
-    image: "https://i.ibb.co/W2GQbfT/block-black.jpg",
+    image: "Accs-Bags-(2).png",
     category: "63292e769de7cef23355a197",
     price: 600,
     qtyInStock: 2,
@@ -504,7 +504,7 @@ export const products = [
   {
     name: "Block Blue",
     slug: "block-blue",
-    image: "https://i.ibb.co/48CxTX8/block-blue.jpg",
+    image: "Accs-Bags-(3).png",
     category: "63292e769de7cef23355a197",
     price: 790,
     qtyInStock: 3,
@@ -518,7 +518,7 @@ export const products = [
   {
     name: "Suite Blue",
     slug: "suite-blue",
-    image: "https://i.ibb.co/HzQxnHF/suite-blue.jpg",
+    image: "Accs-Bags-(4).png",
     category: "63292e769de7cef23355a197",
     price: 300,
     qtyInStock: 0,
@@ -532,7 +532,7 @@ export const products = [
   {
     name: "Suite Grape",
     slug: "suite-grape",
-    image: "https://i.ibb.co/K5T67yg/suite-grape.jpg",
+    image: "Accs-Bags-(5).jpg",
     category: "63292e769de7cef23355a197",
     price: 450,
     priceAfterDiscount: 222,
@@ -547,7 +547,7 @@ export const products = [
   {
     name: "The pocket XBlack",
     slug: "the-pocket-x-black",
-    image: "https://i.ibb.co/MM5B67D/pocket-x-black.jpg",
+    image: "Accs-wallet-(1).jpg",
     category: "63292e769de7cef23355a197",
     price: 120,
     qtyInStock: 0,
@@ -561,7 +561,7 @@ export const products = [
   {
     name: "The pocket YBlack",
     slug: "the-pocket-y-black",
-    image: "https://i.ibb.co/qCmsDb6/pocket-y-black.jpg",
+    image: "Accs-wallet-(2).png",
     category: "63292e769de7cef23355a197",
     price: 140,
     qtyInStock: 7,
@@ -575,7 +575,7 @@ export const products = [
   {
     name: "The pocket Beige",
     slug: "the-pocket-beige",
-    image: "https://i.ibb.co/jbjfc2y/pocket-x-beige.jpg",
+    image: "Accs-wallet-(3).png",
     category: "63292e769de7cef23355a197",
     price: 400,
     qtyInStock: 8,
@@ -589,7 +589,7 @@ export const products = [
   {
     name: "The pocket Blue",
     slug: "the-pocket-blue",
-    image: "https://i.ibb.co/bXWLrGj/pocket-y-blue.jpg",
+    image: "Accs-wallet-(4).webp",
     category: "63292e769de7cef23355a197",
     price: 600,
     priceAfterDiscount: 222,

@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Leanne Graham",
+    "email": "Sincere@april.biz",
+    "password": "123456789",
+    "image": "user-(1).png",
+    "role": "admin",
+    "active": true
+  },
+  {
+    "name": "Ervin Howell",
+    "email": "Shanna@melissa.tv",
+    "password": "123456789",
+    "image": "user-(2).jpg",
+    "role": "admin",
+    "active": true
+  },
+  {
+    "name": "Clementine Bauch",
+    "email": "Nathan@yesenia.net",
+    "password": "123456789",
+    "image": "user-(3).jpg",
+    "role": "user",
+    "active": true
+  },
+  {
+    "name": "Patricia Lebsack",
+    "email": "Julianne.OConner@kory.org",
+    "password": "123456789",
+    "image": "user-(4).jpg",
+    "role": "user",
+    "active": true
+  },
+  {
+    "name": "Chelsey Dietrich",
+    "email": "Lucio_Hettinger@annie.ca",
+    "password": "123456789",
+    "image": "user-(5).jpg",
+    "role": "user",
+    "active": true
+  },
+  {
+    "name": "Mrs. Dennis Schulist",
+    "email": "Karley_Dach@jasper.info",
+    "password": "123456789",
+    "image": "user-(6).jpg",
+    "role": "user",
+    "active": true
+  },
+  {
+    "name": "Kurtis Weissnat",
+    "email": "Telly.Hoeger@billy.biz",
+    "password": "123456789",
+    "image": "user-(7).jpg",
+    "role": "user",
+    "active": true
+  },
+  {
+    "name": "Nicholas Runolfsdottir V",
+    "email": "Sherwood@rosamond.me",
+    "password": "123456789",
+    "image": "user-(8).jpg",
+    "role": "user",
+    "active": true
+  },
+  {
+    "name": "Glenna Reichert",
+    "email": "Chaim_McDermott@dana.io",
+    "password": "123456789",
+    "image": "user-(9).webp",
+    "role": "user",
+    "active": true
+  },
+  {
+    "name": "Clementina DuBuque",
+    "email": "Rey.Padberg@karina.biz",
+    "password": "123456789",
+    "image": "user-(10).jpg",
+    "role": "user",
+    "active": true
+  }
+]
