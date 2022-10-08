@@ -12,7 +12,9 @@ export const uploadUserImage = uploadSingleImg("image");
 export const resizeUserImage = asyncHandler(async (req, res, next) => {
   if (!req.file) return next();
 
-  const filename = `user-${req.user._id}-${Date.now()}.jpeg`;
+  const filename = `user-${
+    req.user ? req.user._id : Math.random().toString().split(".")[1]
+  }-${Date.now()}.jpeg`;
 
   await sharp(req.file.buffer)
     .resize(500, 500)
@@ -66,12 +68,14 @@ const createSendToken = (user, status, res) => {
 // @route   POST /api/v1/users/register
 // @access  Public
 export const register = asyncHandler(async (req, res, next) => {
-  const {name, email, password, passwordConfirmation} = req.body;
+  const {name, email, password, passwordConfirmation, image} = req.body;
+
   const newUser = await User.create({
     name,
     email,
     password,
     passwordConfirmation,
+    image,
   });
 
   createSendToken(newUser, 201, res);

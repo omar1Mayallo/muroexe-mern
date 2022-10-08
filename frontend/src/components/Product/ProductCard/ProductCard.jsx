@@ -26,7 +26,7 @@ const ProductCard = ({
   };
   return (
     <ProductItem className="p-3 m-2">
-      <Link to={`/${_id}`}>
+      <Link to={`/shop/${_id}`}>
         <Image
           src={image}
           alt="product-image"
@@ -36,9 +36,7 @@ const ProductCard = ({
       </Link>
       <hr />
 
-      <Link to={`/${_id}`}>
-        <CardTitle style={{fontSize: "calc(0.75em + 1vmin)"}}>{name}</CardTitle>
-      </Link>
+      <CardTitle style={{fontSize: "calc(0.75em + 1vmin)"}}>{name}</CardTitle>
 
       <div className="product-body">
         <div className="my-2">

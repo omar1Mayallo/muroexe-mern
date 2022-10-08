@@ -1,5 +1,5 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
-import axios from "axios";
+import {useGetData} from "../../API/API Hooks/useGetData";
 const initialState = {
   allCategories: [],
   loading: false,
@@ -11,8 +11,8 @@ export const getAllCategories = createAsyncThunk(
   async (_, thunkAPI) => {
     const {rejectWithValue} = thunkAPI;
     try {
-      const {data} = await axios("/api/categories");
-      return data;
+      const res = await useGetData("/api/categories");
+      return res;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -20,7 +20,7 @@ export const getAllCategories = createAsyncThunk(
 );
 
 const categoriesSlice = createSlice({
-  name: "product",
+  name: "categories",
   initialState,
   reducers: {},
   extraReducers: {

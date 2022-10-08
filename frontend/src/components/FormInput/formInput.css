@@ -1,0 +1,10 @@
+.inputGroup span {
+  color: red;
+  display: none;
+}
+.inputGroup input:invalid[focused="true"] {
+  border: 1px solid red;
+}
+.inputGroup input:invalid[focused="true"] ~ span {
+  display: block;
+}

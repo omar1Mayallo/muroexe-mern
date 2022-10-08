@@ -31,7 +31,13 @@ import {
 const router = express.Router();
 
 //Authentication
-router.post("/register", registerValidator, register);
+router.post(
+  "/register",
+  uploadUserImage,
+  resizeUserImage,
+  registerValidator,
+  register
+);
 router.post("/login", loginValidator, login);
 
 router.use(protect);

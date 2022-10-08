@@ -13,15 +13,13 @@ const FormContainer = ({
   linkTxt,
 }) => {
   return (
-    <FContainer className="m-auto p-5 position-relative w-75">
+    <FContainer className="m-auto p-5 position-relative">
       <FormAvatar>
         <BsPersonFill />
       </FormAvatar>
       <FormHeader>{formHead}</FormHeader>
       {children}
-      <Button className="my-4" type="submit">
-        {btnName}
-      </Button>
+
       <p>
         {inquiry}
         <Link to={link} style={{fontWeight: "900", fontFamily: "Helvetica"}}>

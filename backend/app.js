@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import dotenv from "dotenv";
+import cors from "cors";
 import path from "path";
 import {fileURLToPath} from "url";
 
@@ -27,6 +28,10 @@ import wishlistRouter from "./Routes/wishlistRouter.js";
 dotenv.config();
 //Initialize Express App
 const app = express();
+
+// Enable other domains to access your application
+app.use(cors());
+app.options("*", cors());
 
 //Serve static files
 const __filename = fileURLToPath(import.meta.url);
