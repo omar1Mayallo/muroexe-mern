@@ -31,7 +31,7 @@ const ProductCard = ({
           src={image}
           alt="product-image"
           className="w-100"
-          style={{height: "230px"}}
+          style={{height: "200px"}}
         />
       </Link>
       <hr />

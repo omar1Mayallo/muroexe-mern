@@ -5,7 +5,7 @@ import {Col, Container, Row, Alert, Badge, Button} from "react-bootstrap";
 import Slider from "react-slick";
 import {useNavigate, useLocation} from "react-router-dom";
 import {getProductDetails} from "../../RTK/slices/productsSlice";
-import Spinner from "../../components/Spinner/Spinner";
+import Spinner from "../../components/Utils/Spinner/Spinner";
 import Notify from "../../hooks/useNotification";
 import {ToastContainer} from "react-toastify";
 import SecReviews from "../../sections/ProductPg-Sections/SecReviews";

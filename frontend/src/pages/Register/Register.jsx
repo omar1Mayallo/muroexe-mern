@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {Container, Row, Col, Form, Button, Spinner} from "react-bootstrap";
 import FormContainer from "../../layout/FormContainer/FormContainer";
-import FormInput from "../../components/FormInput/FormInput";
+import FormInput from "../../components/Utils/FormInput/FormInput";
 import registerInputs from "./registerInputs";
 import {RegisterHook} from "../../hooks/Auth/registerHook";
 import {ToastContainer} from "react-toastify";

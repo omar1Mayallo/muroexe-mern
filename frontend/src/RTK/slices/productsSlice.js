@@ -60,7 +60,12 @@ export const getAllProductsShop = createAsyncThunk(
       const res = await useGetData(`/api/products?${queryString}`);
       return res;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.message);
+      // if (error.response && error.response.data.message) {
+      //   return rejectWithValue(error.response.data.message);
+      // } else {
+      //   return rejectWithValue(error.message);
+      // }
     }
   }
 );

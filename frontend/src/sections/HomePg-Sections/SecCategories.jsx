@@ -5,7 +5,7 @@ import {LinkContainer} from "react-router-bootstrap";
 import Slider from "react-slick";
 import {useDispatch, useSelector} from "react-redux";
 import {getAllCategories} from "../../RTK/slices/categoriesSlice";
-import Spinner from "../../components/Spinner/Spinner";
+import Spinner from "../../components/Utils/Spinner/Spinner";
 
 const SecCategories = () => {
   const dispatch = useDispatch();

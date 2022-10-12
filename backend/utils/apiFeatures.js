@@ -46,6 +46,7 @@ export default class APIFeatures {
       //   {description: {$regex: this.queryString.keyword, $options: "i"}},
       // ];
       this.query = this.query.find(keywordObj);
+      this.countBeforePagination = this.query.find(keywordObj);
     }
     return this;
   }

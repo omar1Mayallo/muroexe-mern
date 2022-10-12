@@ -1,0 +1,10 @@
+.shop-Sec {
+  position: relative;
+}
+.shop-Sec .side-filter-container {
+  position: relative;
+}
+.shop-Sec .side-filter {
+  position: sticky;
+  top: 0;
+}

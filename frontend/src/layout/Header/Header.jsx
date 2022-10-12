@@ -12,7 +12,7 @@ import {LinkContainer} from "react-router-bootstrap";
 import {BsCartFill, BsPersonFill} from "react-icons/bs";
 import {useDispatch, useSelector} from "react-redux";
 import {getAllCategories} from "../../RTK/slices/categoriesSlice";
-import Spinner from "../../components/Spinner/Spinner";
+import Spinner from "../../components/Utils/Spinner/Spinner";
 const Header = () => {
   const dispatch = useDispatch();
   const {loading, allCategories, error} = useSelector(

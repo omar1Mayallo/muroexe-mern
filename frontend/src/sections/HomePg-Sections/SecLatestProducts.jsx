@@ -2,10 +2,10 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import Slider from "react-slick";
 import {Container, Alert} from "react-bootstrap";
-import SectionHead from "../../components/SectionHead/SectionHead";
+import SectionHead from "../../layout/SectionHead/SectionHead";
 import SecContainer from "../../layout/SecContainer/SecContainer";
 import ProductCard from "../../components/Product/ProductCard/ProductCard";
-import Spinner from "../../components/Spinner/Spinner";
+import Spinner from "../../components/Utils/Spinner/Spinner";
 
 //Requests
 import {getLatestProducts} from "../../RTK/slices/productsSlice";
