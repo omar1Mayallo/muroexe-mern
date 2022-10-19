@@ -1,30 +1,34 @@
 import React, {useEffect} from "react";
-import {useSelector, useDispatch} from "react-redux";
 import SecContainer from "../../layout/SecContainer/SecContainer";
-import {Col, Container, Row, Alert, Badge, Button} from "react-bootstrap";
+import {
+  Col,
+  Container,
+  Row,
+  Alert,
+  Badge,
+  Button,
+  Image,
+  ListGroup,
+  Form,
+  Accordion,
+} from "react-bootstrap";
 import Slider from "react-slick";
-import {useNavigate, useLocation} from "react-router-dom";
-import {getProductDetails} from "../../RTK/slices/productsSlice";
+import {useNavigate, useParams} from "react-router-dom";
 import Spinner from "../../components/Utils/Spinner/Spinner";
-import Notify from "../../hooks/useNotification";
 import {ToastContainer} from "react-toastify";
 import SecReviews from "../../sections/ProductPg-Sections/SecReviews";
+import ProductDetailsHook from "../../hooks/Product/productDetailsHook";
+import {BsHeart} from "react-icons/bs";
+import Rating from "../../components/Utils/Rating/Rating";
+import AddReview from "../../components/Review/AddReview/AddReview";
+import "./productDetails.css";
+
 const ProductDetails = () => {
-  const location = useLocation();
+  const {id} = useParams();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const productId = location.pathname.split("shop/")[1];
-
-  const {loading, productDetails, error} = useSelector(
-    (state) => state.products
-  );
-
-  const {data} = productDetails;
-  useEffect(() => {
-    dispatch(getProductDetails(productId));
-  }, [productId, dispatch]);
-
-  console.log(data);
+  const [productItem, loading, error] = ProductDetailsHook(id);
+  console.log(productItem);
+  ////////////////////////////////////////////
   const settings = {
     dots: true,
     infinite: true,
@@ -38,9 +42,8 @@ const ProductDetails = () => {
       <SecContainer secName="productDetails-Sec" withMargin>
         <Container>
           <div className="my-3">
-            {/* <Button variant="dark" onClick={() => navigate("/")}> */}
-            <Button variant="dark" onClick={() => Notify("Hello", "warn")}>
-              Go Back
+            <Button variant="dark" onClick={() => navigate("/shop")}>
+              Continuo shopping
             </Button>
           </div>
           <div className="my-3">
@@ -49,75 +52,235 @@ const ProductDetails = () => {
             ) : loading ? (
               <Spinner />
             ) : (
-              <>
-                <Row>
-                  <Col lg={5} md={6} sm={12} className="mb-5">
-                    <Slider {...settings}>
-                      <div>1</div>
-                      <div>2</div>
-                      <div>3</div>
-                    </Slider>
-                  </Col>
-                  <Col lg={7} md={6} sm={12}>
-                    <Row>
-                      <Col xs={10}>Product Name</Col>
-                      <Col xs={2}>Wish Icon</Col>
-                      <Col xs={12}>Category : Product Name</Col>
-                    </Row>
+              productItem && (
+                <>
+                  <Row>
+                    <Col lg={5} md={6} sm={12} className="mb-5">
+                      {productItem.sliderImages.length ? (
+                        <Slider {...settings}>
+                          {productItem.sliderImages.map((img, idx) => (
+                            <Image
+                              key={idx}
+                              src={img}
+                              alt="product-slider-image"
+                              fluid
+                            />
+                          ))}
+                        </Slider>
+                      ) : (
+                        <>
+                          <Image
+                            src={productItem.image}
+                            alt="product-image"
+                            fluid
+                          />
+                        </>
+                      )}
+                    </Col>
+                    <Col lg={7} md={6} sm={12}>
+                      <Row>
+                        <ListGroup variant="flush">
+                          <ListGroup.Item>
+                            <Row>
+                              <Col xs={10}>
+                                <h3>{productItem.name}</h3>
+                              </Col>
+                              <Col xs={2} className="text-center">
+                                <BsHeart
+                                  size="25px"
+                                  style={{cursor: "pointer"}}
+                                />
+                              </Col>
+                            </Row>
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            <Rating
+                              size={25}
+                              ratingAvr={productItem.ratingAvr}
+                              numReviews={productItem.numReviews}
+                            />
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            <div className="price-Comp">
+                              {productItem.priceAfterDiscount ? (
+                                <>
+                                  <div className="d-flex align-items-center">
+                                    <span style={{fontSize: "23px"}}>
+                                      ${productItem.priceAfterDiscount}
+                                    </span>
+                                    <span
+                                      className="ms-2"
+                                      style={{
+                                        textDecoration: "line-through",
+                                        color: "gray",
+                                      }}
+                                    >
+                                      ${productItem.price}
+                                    </span>
+                                    <Badge bg="danger" className="ms-2">
+                                      -
+                                      {Math.ceil(
+                                        ((productItem.price -
+                                          productItem.priceAfterDiscount) /
+                                          productItem.price) *
+                                          100
+                                      )}
+                                      %
+                                    </Badge>
+                                  </div>
+                                </>
+                              ) : (
+                                <div>
+                                  <span style={{fontSize: "23px"}}>
+                                    ${productItem.price}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            <div className="category-subs-Comp">
+                              <h4>
+                                <Badge bg="info">
+                                  {productItem.category.name}
+                                </Badge>
+                              </h4>
+                              {productItem.subcategories.length &&
+                                productItem.subcategories.map((subCat, idx) => (
+                                  <span key={idx} className="me-2">
+                                    <Badge bg="primary">{subCat.name}</Badge>
+                                  </span>
+                                ))}
+                            </div>
+                          </ListGroup.Item>
 
-                    <Row>
-                      <Col xs={12}>Price or PriceAfterDiscount $</Col>
-                      <Col xs={12}>
-                        <span style={{textDecoration: "line-through"}}>
-                          600$
-                        </span>
-                        <Badge bg="danger">-80%</Badge>
-                      </Col>
-                    </Row>
+                          {productItem.size.length !== 0 && (
+                            <ListGroup.Item>
+                              <div className="size-Comp">
+                                <h5>Size</h5>
+                                <ul className="size-list-block">
+                                  {productItem.size.map((el, idx) => (
+                                    <li className="size-item" key={idx}>
+                                      <input
+                                        type="radio"
+                                        name="size"
+                                        value={el}
+                                      />
+                                      <span className="radio-label">{el}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </ListGroup.Item>
+                          )}
 
-                    <Row>
-                      <span>Size</span>
-                      <Col xs={12}>Size List</Col>
-                    </Row>
+                          {productItem.colors.length !== 0 && (
+                            <ListGroup.Item>
+                              <div className="color-Comp">
+                                <h5>Color</h5>
+                                <ul className="color-list-block">
+                                  {/* {productItem.colors.map((color, idx) => (
+                                    <li className="color-item" key={idx}>
+                                      <input
+                                        type="radio"
+                                        name="size"
+                                        value={color}
+                                      />
+                                      <span
+                                        className="radio-label"
+                                        style={{
+                                          background: `${color}`,
+                                        }}
+                                      ></span>
+                                    </li>
+                                  ))} */}
+                                  {productItem.colors.map((color, index) => {
+                                    return (
+                                      <div
+                                        key={index}
+                                        // onClick={() => colorClick(index, color)}
+                                        className="color me-2"
+                                        style={{
+                                          cursor: "pointer",
+                                          height: "40px",
+                                          width: "40px",
+                                          borderRadius: "50%",
+                                          backgroundColor: color,
+                                          border: "3px solid black",
+                                          // border:
+                                          //   indexColor === index
+                                          //     ? "3px solid black"
+                                          //     : "none",
+                                        }}
+                                      ></div>
+                                    );
+                                  })}
+                                </ul>
+                              </div>
+                            </ListGroup.Item>
+                          )}
 
-                    <Row>
-                      <span>Color</span>
-                      <Col xs={12}>Color List</Col>
-                    </Row>
+                          {productItem.qtyInStock > 0 && (
+                            <ListGroup.Item>
+                              <div>
+                                <h5>Quantity</h5>
+                                <Row>
+                                  <Col xs={3}>
+                                    <Form.Control
+                                      as="select"
+                                      // value={qty}
+                                      // onChange={(e) => setQty(e.target.value)}
+                                    >
+                                      {[
+                                        ...Array(productItem.qtyInStock).keys(),
+                                      ].map((x) => (
+                                        <option key={x + 1} value={x + 1}>
+                                          {x + 1}
+                                        </option>
+                                      ))}
+                                    </Form.Control>
+                                  </Col>
+                                  <Col xs={9}>
+                                    <Button variant="primary" className="w-100">
+                                      Add To Cart
+                                    </Button>
+                                  </Col>
+                                </Row>
+                              </div>
+                            </ListGroup.Item>
+                          )}
 
-                    {/*If Category !== "Accessories" */}
-                    <Row>
-                      <Col>
-                        <Button>Size Chart</Button>
-                      </Col>
-                    </Row>
+                          <ListGroup.Item>
+                            <Accordion alwaysOpen>
+                              <Accordion.Item eventKey="0">
+                                <Accordion.Header>Description</Accordion.Header>
+                                <Accordion.Body>
+                                  {productItem.description}
+                                </Accordion.Body>
+                              </Accordion.Item>
+                              <Accordion.Item eventKey="1">
+                                <Accordion.Header>Review</Accordion.Header>
+                                <Accordion.Body>
+                                  <AddReview id={id} />
+                                </Accordion.Body>
+                              </Accordion.Item>
+                            </Accordion>
+                          </ListGroup.Item>
+                        </ListGroup>
+                      </Row>
+                    </Col>
+                  </Row>
 
-                    <Row>
-                      <Col xs={3}>
-                        <div>Select Box of Quantity</div>
-                      </Col>
-                      <Col xs={3}>
-                        <Button>Add To Cart</Button>
-                      </Col>
-                    </Row>
+                  {/* REVIEW */}
 
-                    <Row>
-                      <div>Accordion</div>
-                    </Row>
-                  </Col>
-                </Row>
-                <Row>
-                  <div>Add Your Review Modal </div>
-                </Row>
-
-                <Row>
-                  <SecReviews />
-                </Row>
-
-                <Row>
-                  <div>Slider Of Products in The Same Category</div>
-                </Row>
-              </>
+                  <Row>
+                    <SecReviews
+                      numReviews={productItem.reviews.length}
+                      id={id}
+                    />
+                  </Row>
+                </>
+              )
             )}
           </div>
         </Container>

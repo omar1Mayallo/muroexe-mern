@@ -13,8 +13,10 @@ import {BsCartFill, BsPersonFill} from "react-icons/bs";
 import {useDispatch, useSelector} from "react-redux";
 import {getAllCategories} from "../../RTK/slices/categoriesSlice";
 import Spinner from "../../components/Utils/Spinner/Spinner";
+import {useNavigate} from "react-router-dom";
 const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {loading, allCategories, error} = useSelector(
     (state) => state.categories
   );
@@ -35,12 +37,16 @@ const Header = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     setUserInfo("");
+
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 500);
   };
 
   const categoriesList =
     data &&
     data.docs.map(({_id, name, slug}) => (
-      <LinkContainer to={`shop/categories/${slug}`} key={_id}>
+      <LinkContainer to={`shop/category/${_id}`} key={_id}>
         <NavDropdown.Item>{name.toUpperCase()}</NavDropdown.Item>
       </LinkContainer>
     ));
@@ -60,9 +66,6 @@ const Header = () => {
             <Nav className="me-auto">
               <LinkContainer to="/shop">
                 <Nav.Link>Shop</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/shop/brands">
-                <Nav.Link>Brands</Nav.Link>
               </LinkContainer>
               <NavDropdown title="Catagories" id="basic-nav-dropdown">
                 {error ? (

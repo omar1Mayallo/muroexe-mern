@@ -60,7 +60,7 @@ const SecCategories = () => {
       <LinkContainer
         key={_id}
         className="p-2"
-        to={`shop/categories/${slug}`}
+        to={`shop/category/${_id}`}
         style={{cursor: "pointer"}}
       >
         <Image src={image} alt="category-img" fluid />

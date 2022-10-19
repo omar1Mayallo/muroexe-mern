@@ -8,7 +8,15 @@ export const getAll = (Model) =>
     let filter = {};
     if (req.filterObj) filter = req.filterObj;
 
-    const numOfDocs = await Model.countDocuments();
+    //Count NumOfProducts after filter
+    const queryObj = {...req.query};
+    const excludesFields = ["page", "sort", "limit", "fields"];
+    excludesFields.forEach((field) => delete queryObj[field]);
+    let queryStr = JSON.stringify(queryObj);
+    queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
+    const filteringObj = JSON.parse(queryStr);
+    const numOfDocs = await Model.countDocuments(filteringObj);
+
     const apiFeatures = new APIFeatures(Model.find(filter), req.query)
       .filter()
       .paginate(numOfDocs)

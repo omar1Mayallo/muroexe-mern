@@ -10,11 +10,10 @@ const ShopHook = () => {
     sortData();
     dispatch(
       getAllProductsShop(
-        `sort=${sort}&limit=${limit}&keyword=${word}&price[gt]=0${priceToQuery}&${catQuery}`
+        `sort=${sort}&limit=${limit}&price[gt]=0${priceToQuery}&${catQuery}&${brandQuery}&${ratingQuery}`
       )
     );
   };
-  // dispatch(getAllProductsShop(`sort=${sort}&limit=${limit}&page=${page}&keyword=${word}&${queryCat}&${brandCat}${priceFromString}${priceToString}`));
   useEffect(() => {
     getProducts();
   }, []);
@@ -46,7 +45,7 @@ const ShopHook = () => {
     sortData();
     dispatch(
       getAllProductsShop(
-        `sort=${sort}&limit=${limit}&page=${page}&keyword=${word}&price[gt]=0${priceToQuery}&${catQuery}`
+        `sort=${sort}&limit=${limit}&page=${page}&${catQuery}&${brandQuery}&price[gt]=0${priceToQuery}&${ratingQuery}`
       )
     );
   };
@@ -55,16 +54,19 @@ const ShopHook = () => {
   let priceTo = "",
     priceToQuery = "";
   let catQuery = "";
-  let word = "";
-  const getQueriesStorage = () => {
-    //Search word
-    if (localStorage.getItem("searchWord") != null)
-      word = localStorage.getItem("searchWord");
+  let brandQuery = "";
+  let ratingQuery = "";
 
+  const getQueriesStorage = () => {
     // categoriesChecked
     if (localStorage.getItem("categoriesChecked") != null)
       catQuery = localStorage.getItem("categoriesChecked");
-
+    // brandsChecked
+    if (localStorage.getItem("brandsChecked") != null)
+      brandQuery = localStorage.getItem("brandsChecked");
+    // ratingAverage
+    if (localStorage.getItem("ratingAverage") != null)
+      ratingQuery = localStorage.getItem("ratingAverage");
     //Price
     if (localStorage.getItem("priceTo") != null)
       priceTo = localStorage.getItem("priceTo");

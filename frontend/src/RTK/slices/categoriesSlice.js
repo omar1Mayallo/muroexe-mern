@@ -4,6 +4,8 @@ const initialState = {
   allCategories: [],
   loading: false,
   error: null,
+
+  category: {categoryInfo: [], loading: false, error: null},
 };
 
 export const getAllCategories = createAsyncThunk(
@@ -15,6 +17,23 @@ export const getAllCategories = createAsyncThunk(
       return res;
     } catch (error) {
       return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getACategory = createAsyncThunk(
+  "category/fetchACategory",
+  async (catId, thunkAPI) => {
+    const {rejectWithValue} = thunkAPI;
+    try {
+      const res = await useGetData(`/api/categories/${catId}`);
+      return res;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data.errors[0].msg);
+      } else {
+        return rejectWithValue(error);
+      }
     }
   }
 );
@@ -36,6 +55,19 @@ const categoriesSlice = createSlice({
     [getAllCategories.rejected]: (state, action) => {
       state.error = action.payload;
       state.loading = false;
+    },
+    // GET A Category
+    [getACategory.pending]: (state, action) => {
+      state.category.loading = true;
+      state.category.error = null;
+    },
+    [getACategory.fulfilled]: (state, action) => {
+      state.category.categoryInfo = action.payload;
+      state.category.loading = false;
+    },
+    [getACategory.rejected]: (state, action) => {
+      state.category.error = action.payload;
+      state.category.loading = false;
     },
   },
 });

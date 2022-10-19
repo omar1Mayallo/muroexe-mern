@@ -4,12 +4,13 @@ import {useGetData} from "../../API/API Hooks/useGetData";
 const initialState = {
   latestProducts: [],
   topSalesProducts: [],
-  productDetails: [],
 
   loading: false,
   error: null,
 
   allProductsShop: {productsShop: [], loading: false, error: null},
+  allProductsCategory: {productsCategory: [], loading: false, error: null},
+  productDetails: {productInfo: [], loading: false, error: null},
 };
 
 //__________HOME_PAGE__________//
@@ -70,6 +71,25 @@ export const getAllProductsShop = createAsyncThunk(
   }
 );
 
+//__________CATEGORY_PAGE__________//
+export const getAllProductsCategory = createAsyncThunk(
+  "/products/fetchAllProductsCategory",
+  async (queryString, thunkAPI) => {
+    const {rejectWithValue} = thunkAPI;
+    try {
+      const res = await useGetData(`/api/products?${queryString}`);
+      return res;
+    } catch (error) {
+      return rejectWithValue(error.message);
+      // if (error.response && error.response.data.message) {
+      //   return rejectWithValue(error.response.data.message);
+      // } else {
+      //   return rejectWithValue(error.message);
+      // }
+    }
+  }
+);
+
 const productsSlice = createSlice({
   name: "product",
   initialState,
@@ -107,17 +127,18 @@ const productsSlice = createSlice({
     //-----------------------------------------------------//
     //GET Product Details
     [getProductDetails.pending]: (state, action) => {
-      state.loading = true;
-      state.error = null;
+      state.productDetails.loading = true;
+      state.productDetails.error = null;
     },
     [getProductDetails.fulfilled]: (state, action) => {
-      state.productDetails = action.payload;
-      state.loading = false;
+      state.productDetails.productInfo = action.payload;
+      state.productDetails.loading = false;
     },
     [getProductDetails.rejected]: (state, action) => {
-      state.error = action.payload;
-      state.loading = false;
+      state.productDetails.error = action.payload;
+      state.productDetails.loading = false;
     },
+
     //-----------------------------------------------------//
     //-----------------------------------------------------//
     //GET All Products For ShopPage
@@ -132,6 +153,21 @@ const productsSlice = createSlice({
     [getAllProductsShop.rejected]: (state, action) => {
       state.allProductsShop.error = action.payload;
       state.allProductsShop.loading = false;
+    },
+    //-----------------------------------------------------//
+    //-----------------------------------------------------//
+    //GET All Products For CategoryPage
+    [getAllProductsCategory.pending]: (state, action) => {
+      state.allProductsCategory.loading = true;
+      state.allProductsCategory.error = null;
+    },
+    [getAllProductsCategory.fulfilled]: (state, action) => {
+      state.allProductsCategory.productsCategory = action.payload;
+      state.allProductsCategory.loading = false;
+    },
+    [getAllProductsCategory.rejected]: (state, action) => {
+      state.allProductsCategory.error = action.payload;
+      state.allProductsCategory.loading = false;
     },
   },
 });

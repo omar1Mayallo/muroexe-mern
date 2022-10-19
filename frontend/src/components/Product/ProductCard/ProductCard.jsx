@@ -26,12 +26,12 @@ const ProductCard = ({
   };
   return (
     <ProductItem className="p-3 m-2">
-      <Link to={`/shop/${_id}`}>
+      <Link to={`/shop/product/${_id}`}>
         <Image
           src={image}
           alt="product-image"
           className="w-100"
-          style={{height: "200px"}}
+          // style={{height: "225px"}}
         />
       </Link>
       <hr />

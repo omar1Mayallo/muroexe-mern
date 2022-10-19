@@ -36,7 +36,11 @@ const Shop = () => {
           "
         />
         <Row>
-          <FilterBar results={results} getProducts={getProducts} />
+          <FilterBar
+            results={results}
+            getProducts={getProducts}
+            sortName="sortType"
+          />
           <Col lg={3} className="side-filter-container">
             <SideFilter />
           </Col>

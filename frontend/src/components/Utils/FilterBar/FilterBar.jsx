@@ -1,9 +1,9 @@
 import React from "react";
 import {Row, Col, Form} from "react-bootstrap";
 
-const FilterBar = ({results, getProducts}) => {
+const FilterBar = ({results, getProducts, sortName}) => {
   const sortClicked = (key) => {
-    localStorage.setItem("sortType", key);
+    localStorage.setItem(sortName, key);
     getProducts();
   };
   return (

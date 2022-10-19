@@ -1,22 +1,42 @@
-import React, {useState, useEffect} from "react";
-import {Accordion, Button, Form} from "react-bootstrap";
+import React, {useState} from "react";
+import {Accordion} from "react-bootstrap";
 import RangeSlider from "react-bootstrap-range-slider";
 import SideFilterHook from "../../../hooks/Shop/sideFilterHook";
-
+import ReactStars from "react-rating-stars-component";
+import {MdStar, MdStarBorder} from "react-icons/md";
 const SideFilter = () => {
-  const [priceTo, categories, onClickCategory, getProducts] = SideFilterHook();
+  const [
+    priceTo,
+    categories,
+    onClickCategory,
+    brands,
+    onClickBrand,
+    onClickRating,
+  ] = SideFilterHook();
   let priceToStorage = localStorage.getItem("priceTo");
   const [value, setValue] = useState(priceToStorage);
 
-  //Search
-  const [searchWord, setSearchWord] = useState("");
-  const handleSearch = (e) => {
-    setSearchWord(e.target.value);
-  };
-  const clickSearch = () => {
-    localStorage.setItem("searchWord", searchWord);
-    getProducts();
-  };
+  let settings = [];
+  for (let index = 5; index >= 1; index--) {
+    const setting = {
+      size: 25,
+      value: index,
+      isHalf: true,
+      emptyIcon: <MdStarBorder />,
+      filledIcon: <MdStar />,
+      edit: false,
+    };
+    settings.push(setting);
+  }
+
+  const starsItems = settings.map((setting, idx) => (
+    <div className="d-flex mb-2" key={idx}>
+      <input onChange={onClickRating} type="checkbox" value={setting.value} />
+      <div className="ms-2">
+        <ReactStars {...setting} />
+      </div>
+    </div>
+  ));
 
   return (
     <div className="side-filter p-2 bg-light">
@@ -65,49 +85,33 @@ const SideFilter = () => {
             <Accordion.Header>Brands</Accordion.Header>
             <Accordion.Body>
               <div className="d-flex mb-2">
-                <input type="checkbox" />
-                <div className="filter-sub ms-2">Adidas</div>
+                <input onChange={onClickBrand} type="checkbox" value="0" />
+                <div className="filter-cat ms-2">All</div>
               </div>
-              <div className="d-flex mb-2">
-                <input type="checkbox" />
-                <div className="filter-sub ms-2">Nike</div>
-              </div>
-              <div className="d-flex mb-2">
-                <input type="checkbox" />
-                <div className="filter-sub ms-2">Converse</div>
-              </div>
+              {brands ? (
+                brands.map((item) => (
+                  <div className="d-flex mb-2" key={item._id}>
+                    <input
+                      onChange={onClickBrand}
+                      type="checkbox"
+                      value={item._id}
+                    />
+                    <div className="filter-cat ms-2">{item.name}</div>
+                  </div>
+                ))
+              ) : (
+                <h6>No Brands Yet</h6>
+              )}
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="3">
             <Accordion.Header>Rating</Accordion.Header>
             <Accordion.Body>
-              <h6>5 Stars</h6>
-              <h6>4 Stars</h6>
-              <h6>3 Stars</h6>
-              <h6>2 Stars</h6>
-              <h6>1 Stars</h6>
-            </Accordion.Body>
-          </Accordion.Item>
-          <Accordion.Item eventKey="4">
-            <Accordion.Header>Search</Accordion.Header>
-            <Accordion.Body>
-              <Form className="d-flex">
-                <Form.Control
-                  type="search"
-                  placeholder="Search"
-                  className="me-2"
-                  aria-label="Search"
-                  size="sm"
-                  onChange={handleSearch}
-                />
-                <Button
-                  size="sm"
-                  variant="primary"
-                  onClick={() => clickSearch()}
-                >
-                  search
-                </Button>
-              </Form>
+              <div className="d-flex mb-2">
+                <input onChange={onClickRating} type="checkbox" value="0" />
+                <div className="filter-cat ms-2">All</div>
+              </div>
+              {starsItems}
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
