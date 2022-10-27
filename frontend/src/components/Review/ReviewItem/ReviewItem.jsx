@@ -152,24 +152,6 @@ const ReviewItem = ({rev}) => {
           </Row>
         </Col>
       </Row>
-      {/* <div className="d-flex align-items-center  user-Info">
-          <Image
-            src={rev.user.image}
-            alt="user-image"
-            className="rounded-circle"
-            style={{width: "50px", height: "50px"}}
-          />
-          <div className="d-flex flex-column justify-content-center">
-            <h6>{rev.user.name}</h6>
-            <span>{rev.createdAt.substring(0, 10)}</span>
-          </div>
-        </div>
-        <div>
-          <div>
-            <Rating size={20} ratingAvr={rev.rating} />
-          </div>
-          <p>{rev.review}</p>
-        </div> */}
     </div>
   );
 };

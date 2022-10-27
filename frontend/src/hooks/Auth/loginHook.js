@@ -2,11 +2,9 @@ import React, {useState, useEffect} from "react";
 import Notify from "../useNotification";
 import {useDispatch, useSelector} from "react-redux";
 import {login} from "../../RTK/slices/authSlice";
-import {useNavigate} from "react-router-dom";
 
 export const LoginHook = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [values, setValues] = useState({
     email: "",

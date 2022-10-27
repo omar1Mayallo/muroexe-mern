@@ -8,4 +8,16 @@ const useInsertUpdateData = async (url, params) => {
   return res;
 };
 
-export {useInsertUpdateData};
+const useUpdateDataWithImage = async (url, params) => {
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  };
+  const res = await baseUrl.patch(url, params, config);
+
+  return res;
+};
+
+export {useInsertUpdateData, useUpdateDataWithImage};

@@ -17,9 +17,11 @@ const FormInput = ({errorMessage, handleChange, ...restProps}) => {
         {...restProps}
       />
 
-      <span className="error-message" style={{color: "red"}}>
-        {errorMessage}
-      </span>
+      {errorMessage && (
+        <span className="error-message" style={{color: "red"}}>
+          {errorMessage}
+        </span>
+      )}
     </Form.Group>
   );
 };

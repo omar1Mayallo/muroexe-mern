@@ -12,6 +12,7 @@ import asyncHandler from "express-async-handler";
 // Upload single image
 export const uploadCategoryImage = uploadSingleImg("image");
 
+// Resize image
 export const resizeCategoryImage = asyncHandler(async (req, res, next) => {
   if (!req.file) return next();
 
@@ -26,6 +27,7 @@ export const resizeCategoryImage = asyncHandler(async (req, res, next) => {
   req.body.image = filename;
   next();
 });
+
 // @desc    Create a new category
 // @route   POST /api/categories
 // @access  Private

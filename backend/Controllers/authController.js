@@ -1,14 +1,17 @@
 import User from "../Models/userModel.js";
 import {promisify} from "util";
+import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import asyncHandler from "express-async-handler";
 import APIError from "../utils/apiError.js";
 import createToken from "../utils/createToken.js";
 import sharp from "sharp";
 import {uploadSingleImg} from "../Middlewares/ImgUploadMiddleware.js";
+
 // Upload single image
 export const uploadUserImage = uploadSingleImg("image");
 
+// Resize image
 export const resizeUserImage = asyncHandler(async (req, res, next) => {
   if (!req.file) return next();
 
@@ -36,7 +39,7 @@ const filterObj = (obj, ...allowedFields) => {
 };
 
 //Refactor A Send Token Response that used in register, login
-//Best place to reserve the token in browser cookies
+//NOTE: Best place to reserve the token in browser cookies
 const createSendToken = (user, status, res) => {
   const token = createToken(user._id);
   const cookieOptions = {
@@ -90,8 +93,8 @@ export const register = asyncHandler(async (req, res, next) => {
   // });
 });
 
-// @desc    Register
-// @route   POST /api/v1/users/register
+// @desc    Login
+// @route   POST /api/v1/users/login
 // @access  Public
 export const login = asyncHandler(async (req, res, next) => {
   // 1) If There is Email and Password
@@ -151,7 +154,7 @@ export const protect = asyncHandler(async (req, res, next) => {
   next();
 });
 
-// @desc    Allowed Access only for ADMIN
+// @desc    Accessability
 export const allowedTo = (...roles) =>
   asyncHandler(async (req, res, next) => {
     if (!roles.includes(req.user.role)) {
@@ -163,35 +166,48 @@ export const allowedTo = (...roles) =>
   });
 
 // @desc    Update Logged User Password
-// @route   PATCH /api/v1/users/updateMyPassword
+// @route   PATCH /api/users/updateMyPassword
 // @access  Private/user
 export const updateMyPassword = asyncHandler(async (req, res, next) => {
-  // 1) Get a user
-  const user = await User.findById(req.user.id).select("+password");
+  const {currentPassword, newPassword, newPasswordConfirmation} = req.body;
+  // 1) Get the logged user
+  const user = await User.findById(req.user._id).select("+password");
   console.log(user);
   // 2) Check if entered currentPassword is correct
-  if (
-    !(await user.checkCorrectPassword(req.body.currentPassword, user.password))
-  ) {
+  if (!(await user.checkCorrectPassword(currentPassword, user.password))) {
     return next(new APIError("Your current password is incorrect", 401));
   }
+  //3) Check if the newPassword === newPasswordConfirmation
+  if (newPassword !== newPasswordConfirmation) {
+    return next(
+      new APIError("New password and new password confirm don't match", 401)
+    );
+  }
 
-  // 3) If The above true, update password
-  user.password = req.body.password;
-  user.passwordConfirmation = req.body.passwordConfirmation;
-  await user.save();
+  // 4) Update The user password
+  const userUpdated = await User.findByIdAndUpdate(
+    req.user._id,
+    {
+      password: await bcrypt.hash(newPassword, 12),
+      passwordChangedAt: Date.now(),
+    },
+    {
+      new: true,
+    }
+  );
 
-  // 4) Login user and send JWT
-  const token = createToken(user._id);
+  // 5) Login user and send JWT
+  const token = createToken(userUpdated._id);
 
   res.status(200).json({
     status: "success",
     token,
+    userUpdated,
   });
 });
 
 // @desc    Update Logged User Profile(name, email)
-// @route   PATCH /api/v1/users/updateMyProfile
+// @route   PATCH /api/users/updateMyProfile
 // @access  Private/user
 export const updateMyProfile = asyncHandler(async (req, res, next) => {
   // 1) Check if the user try to update password
@@ -215,7 +231,7 @@ export const updateMyProfile = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    Delete(Deactivate) Logged User
-// @route   PATCH /api/v1/users/deleteMyProfile
+// @route   PATCH /api/users/deleteMyProfile
 // @access  Private/user
 export const deleteMyProfile = asyncHandler(async (req, res, next) => {
   await User.findByIdAndUpdate(req.user._id, {active: false});

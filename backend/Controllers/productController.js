@@ -10,6 +10,7 @@ import asyncHandler from "express-async-handler";
 import sharp from "sharp";
 import {uploadMixOfImages} from "../Middlewares/ImgUploadMiddleware.js";
 
+// Upload Multiple Images
 export const uploadProductImages = uploadMixOfImages([
   {
     name: "image",
@@ -21,6 +22,7 @@ export const uploadProductImages = uploadMixOfImages([
   },
 ]);
 
+// Resize Multiple Images
 export const resizeProductImages = asyncHandler(async (req, res, next) => {
   if (!req.files) return next();
   //1- Image processing for MAINimage
@@ -60,11 +62,6 @@ export const resizeProductImages = asyncHandler(async (req, res, next) => {
   }
 });
 
-/////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
 // @desc    Create a new product
 // @route   POST /api/products
 // @access  Private

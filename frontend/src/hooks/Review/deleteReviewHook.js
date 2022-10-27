@@ -23,8 +23,8 @@ const DeleteReviewHook = (rev) => {
       if (reviewRemoved !== []) {
         if (reviewRemoved === "") {
           setTimeout(() => {
-            window.location.reload();
-          }, 500);
+            window.location.reload(false);
+          }, 100);
         }
       } else {
         Notify("Something went wrong while Deleting", "error");

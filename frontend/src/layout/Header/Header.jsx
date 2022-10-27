@@ -14,7 +14,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {getAllCategories} from "../../RTK/slices/categoriesSlice";
 import Spinner from "../../components/Utils/Spinner/Spinner";
 import {useNavigate} from "react-router-dom";
+import GetUserCartHook from "../../hooks/Cart/getUserCartHook";
 const Header = () => {
+  const [numOfItems] = GetUserCartHook();
+  console.log(numOfItems);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {loading, allCategories, error} = useSelector(
@@ -78,37 +81,60 @@ const Header = () => {
               </NavDropdown>
             </Nav>
             <Nav className="ms-auto">
-              <LinkContainer to="/cart">
-                <Nav.Link>
-                  <BsCartFill style={{fontSize: "25px"}} />
-                </Nav.Link>
-              </LinkContainer>
               {userInfo !== "" ? (
-                <div className="d-flex ">
-                  <div>
-                    <Image
-                      src={userInfo.image}
-                      className="rounded-circle"
-                      style={{width: "50px", height: "50px"}}
-                    />
-                  </div>
+                <>
+                  <LinkContainer to="/cart">
+                    <Nav.Link>
+                      <div style={{position: "relative"}}>
+                        <span
+                          className="text-light d-flex align-items-center justify-content-center"
+                          style={{
+                            position: "absolute",
+                            top: "-10px",
+                            left: "-10px",
+                            width: "20px",
+                            height: "20px",
+                            borderRadius: "100%",
+                            backgroundColor: "red",
+                          }}
+                        >
+                          {numOfItems ? numOfItems : 0}
+                        </span>
+                        <BsCartFill style={{fontSize: "25px"}} />
+                      </div>
+                    </Nav.Link>
+                  </LinkContainer>
+                  <div className="d-flex ">
+                    <div>
+                      <Image
+                        src={userInfo.image}
+                        className="rounded-circle"
+                        style={{width: "50px", height: "50px"}}
+                      />
+                    </div>
 
-                  <div>
-                    <NavDropdown title={userInfo.name.split(" ")[0]} id="user">
-                      <LinkContainer to="/profile">
-                        <NavDropdown.Item>Profile</NavDropdown.Item>
-                      </LinkContainer>
-                      {userInfo.role === "admin" && (
-                        <LinkContainer to="/admin">
-                          <NavDropdown.Item>Dashboard</NavDropdown.Item>
-                        </LinkContainer>
-                      )}
-                      <NavDropdown.Item onClick={logout}>
-                        Logout
-                      </NavDropdown.Item>
-                    </NavDropdown>
+                    <div>
+                      <NavDropdown
+                        title={userInfo.name.split(" ")[0]}
+                        id="user"
+                      >
+                        {userInfo.role === "user" && (
+                          <LinkContainer to="/user/profile">
+                            <NavDropdown.Item>Profile</NavDropdown.Item>
+                          </LinkContainer>
+                        )}
+                        {userInfo.role === "admin" && (
+                          <LinkContainer to="/admin">
+                            <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                          </LinkContainer>
+                        )}
+                        <NavDropdown.Item onClick={logout}>
+                          Logout
+                        </NavDropdown.Item>
+                      </NavDropdown>
+                    </div>
                   </div>
-                </div>
+                </>
               ) : (
                 <LinkContainer to="/login">
                   <Nav.Link>

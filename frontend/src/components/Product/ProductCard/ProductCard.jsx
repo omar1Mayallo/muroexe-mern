@@ -1,7 +1,7 @@
 import React from "react";
-import {Image} from "react-bootstrap";
+import {Image, Spinner} from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
-import {MdStar, MdStarHalf, MdStarBorder} from "react-icons/md";
+import {MdStar, MdStarHalf, MdStarBorder, MdClear} from "react-icons/md";
 import {
   CardTitle,
   ProductItem,
@@ -10,11 +10,14 @@ import {
   NumOfRev,
 } from "./ProductCardStyles";
 import {Link} from "react-router-dom";
+import RemoveFromWishlistHook from "../../../hooks/Wishlist/removeFromWishlistHook";
 
 // name,slug,price,priceAfterDiscount,ratingAvr,image,numReviews
 const ProductCard = ({
   product: {_id, name, price, priceAfterDiscount, ratingAvr, image, numReviews},
+  wishList,
 }) => {
+  const [handleRemoveFromWishlist, loading] = RemoveFromWishlistHook(_id);
   const setting = {
     size: 25,
     value: ratingAvr,
@@ -26,6 +29,11 @@ const ProductCard = ({
   };
   return (
     <ProductItem className="p-3 m-2">
+      {wishList && (
+        <span className="remove-icon" onClick={handleRemoveFromWishlist}>
+          <MdClear size={25} />
+        </span>
+      )}
       <Link to={`/shop/product/${_id}`}>
         <Image
           src={image}

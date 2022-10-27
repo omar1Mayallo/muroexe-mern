@@ -13,7 +13,12 @@ const SideFilter = () => {
     onClickBrand,
     onClickRating,
   ] = SideFilterHook();
-  let priceToStorage = localStorage.getItem("priceTo");
+  let priceToStorage;
+  if (localStorage.getItem("priceTo") !== null) {
+    priceToStorage = localStorage.getItem("priceTo");
+  } else {
+    priceToStorage = 0;
+  }
   const [value, setValue] = useState(priceToStorage);
 
   let settings = [];

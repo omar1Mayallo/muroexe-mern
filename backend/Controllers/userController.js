@@ -29,5 +29,5 @@ export const getAllUsers = getAll(User);
 
 // @desc    Get a User
 // @route   GET /api/users/:id
-// @access  Private/admin
+// @access  Private/admin,user
 export const getUser = getOne(User);

@@ -9,9 +9,11 @@ import {
 import {uploadSingleImg} from "../Middlewares/ImgUploadMiddleware.js";
 import sharp from "sharp";
 import asyncHandler from "express-async-handler";
+
 // Upload single image
 export const uploadBrandImage = uploadSingleImg("image");
 
+// Resize image
 export const resizeBrandImage = asyncHandler(async (req, res, next) => {
   if (!req.file) return next();
 

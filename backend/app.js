@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import cors from "cors";
+import compression from "compression";
 import path from "path";
 import {fileURLToPath} from "url";
 
@@ -15,15 +16,9 @@ import hpp from "hpp";
 //ErrorHandlers
 import APIError from "./utils/apiError.js";
 import GlobalErrorMiddleware from "./Middlewares/GlobalErrorMiddleware.js";
-//Import All Routes
-import productRouter from "./Routes/productRouter.js";
-import categoryRouter from "./Routes/categoryRouter.js";
-import subCategoryRouter from "./Routes/subCategoryRouter.js";
-import brandRouter from "./Routes/brandRouter.js";
-import userRouter from "./Routes/userRouter.js";
-import reviewRouter from "./Routes/reviewRouter.js";
-import addressRouter from "./Routes/addressRouter.js";
-import wishlistRouter from "./Routes/wishlistRouter.js";
+
+//Routers
+import baseRouters from "./Routes/index.js";
 
 dotenv.config();
 //Initialize Express App
@@ -32,6 +27,12 @@ const app = express();
 // Enable other domains to access your application
 app.use(cors());
 app.options("*", cors());
+
+// Compress all responses
+// Just to make the website more responsive, compressing data reduces the overall size of response hence faster loading times.
+// Compressed data is decompressed on the client side, so the data remains same.
+// Browser is responsible for decompressing the response automatically which is compressed and sent by server.
+app.use(compression());
 
 //Serve static files
 const __filename = fileURLToPath(import.meta.url);
@@ -71,14 +72,7 @@ app.use(
 );
 
 //__________ROUTERS____________//
-app.use("/api/users", userRouter);
-app.use("/api/products", productRouter);
-app.use("/api/categories", categoryRouter);
-app.use("/api/subcategories", subCategoryRouter);
-app.use("/api/brands", brandRouter);
-app.use("/api/reviews", reviewRouter);
-app.use("/api/addresses", addressRouter);
-app.use("/api/wishlist", wishlistRouter);
+baseRouters(app);
 
 //Not Found Routes
 app.use("*", (req, res, next) => {

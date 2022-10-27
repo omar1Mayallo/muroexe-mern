@@ -1,11 +1,24 @@
 import styled from "styled-components";
 
 export const ProductItem = styled.div`
+  position: relative;
+  z-index: 2;
   cursor: pointer;
   border: 1px solid rgba(0, 0, 0, 0.125);
   transition: 0.5s;
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  .remove-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: white;
+    height: 25px;
+    width: 25px;
+    background-color: black;
+    cursor: pointer;
+    z-index: 3;
   }
 `;
 export const CardTitle = styled.h4`
